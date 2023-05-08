@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AddDataFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

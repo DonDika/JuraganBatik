@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877574690279",
+    "project_id": "juraganbatik-a1182",
+    "storage_bucket": "juraganbatik-a1182.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877574690279:android:222476de99dffcffb05942",
+        "android_client_info": {
+          "package_name": "com.dondika.juraganbatik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877574690279-3024onq3gc9etr32kl51a6n5n0kpqes6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqhKKbQAppDmaj2PglWURwuU5e2-G76Go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877574690279-3024onq3gc9etr32kl51a6n5n0kpqes6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
