@@ -1,10 +1,11 @@
-package com.dondika.juraganbatik
+package com.dondika.juraganbatik.ui.admin.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dondika.juraganbatik.R
 
 class HomeFragment : Fragment() {
 
