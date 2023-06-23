@@ -105,7 +105,7 @@ class AddDataFragment : Fragment() {
 
     private fun setListener(){
        binding.apply {
-           filledButton.setOnClickListener {
+           addButton.setOnClickListener {
                addData()
            }
            /*cameraButton.setOnClickListener {
@@ -133,7 +133,8 @@ class AddDataFragment : Fragment() {
 
     private fun addData() = CoroutineScope(Dispatchers.IO).launch {
         try {
-            //val id = get id/username from datastore
+            Log.e( "retrieveDataIO: ", Thread.currentThread().name.toString() )
+            val username = "Toko batik solo"//get id/username from datastore
             val batikName = binding.batikName.editText?.text.toString()
             val batikPrice = binding.batikPrice.editText?.text.toString()
             val batikAmount = binding.batikAmount.editText?.text.toString()
@@ -149,12 +150,13 @@ class AddDataFragment : Fragment() {
                     }.continueWithTask {
                         val batikImg = it.result.toString()
                         val products = Products(
-                            batikName, batikPrice, batikAmount, batikImg
+                            username, batikName, batikPrice, batikAmount, batikImg
                         )
                         productsCollectionRef.add(products)
                     }.await()
                 withContext(Dispatchers.Main){
                     Toast.makeText(requireContext(),"Berhasil upload gambar", Toast.LENGTH_SHORT).show()
+                    Log.e( "retrieveDataMain: ", Thread.currentThread().name.toString() )
                 }
             }
         } catch (e: Exception){

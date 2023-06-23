@@ -49,8 +49,6 @@
         android:layout_height="wrap_content"
         app:icon="@drawable/media_icon"
         app:iconSize="40dp"
-
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagePreview" />
@@ -110,7 +108,7 @@
 
 
     <Button
-        android:id="@+id/filledButton"
+        android:id="@+id/addButton"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

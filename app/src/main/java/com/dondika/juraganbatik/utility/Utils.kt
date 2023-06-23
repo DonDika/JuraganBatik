@@ -1,5 +1,6 @@
 package com.dondika.juraganbatik.utility
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
@@ -20,6 +21,7 @@ object Utils {
     private const val MAXIMAL_SIZE = 1000000
     private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
 
+    @SuppressLint("SuspiciousIndentation")
     fun uriToFile(selectedImg: Uri, context: Context): File{
         val contentResolver: ContentResolver = context.contentResolver
         val myFile = createCustomTempFile(context)

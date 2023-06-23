@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/mobile_navigation_admin"
     app:startDestination="@id/navHome"
     >
 
     <fragment
         android:id="@+id/navHome"
-        android:name="com.dondika.juraganbatik.ui.admin.home.HomeFragment"
+        android:name="com.dondika.juraganbatik.ui.admin.home.HomeAdminFragment"
         android:label="home"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_home_admin"
         />
 
     <fragment

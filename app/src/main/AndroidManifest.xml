@@ -17,7 +17,10 @@
         android:theme="@style/Theme.JuraganBatik"
         tools:targetApi="31">
         <activity
-            android:name=".ui.admin.MainActivity"
+            android:name=".ui.user.MainActivityUser"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.MainActivityAdmin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

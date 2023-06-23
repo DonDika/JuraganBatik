@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/navHistory"
+        android:enabled="true"
+        android:icon="@drawable/add_box_icon"
+        android:title="Chart"/>
+
+    <item
+        android:id="@+id/navAccount"
+        android:enabled="true"
+        android:icon="@drawable/account_icon"
+        android:title="Account"/>
+</menu>
