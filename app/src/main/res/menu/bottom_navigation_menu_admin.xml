@@ -8,7 +8,7 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/navHistory"
+        android:id="@+id/navAddData"
         android:enabled="true"
         android:icon="@drawable/add_box_icon"
         android:title="Sell"/>

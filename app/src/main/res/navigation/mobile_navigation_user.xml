@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation_user"
+    app:startDestination="@id/navHomeUser"
+    >
+
+    <fragment
+        android:id="@+id/navHomeUser"
+        android:name="com.dondika.juraganbatik.ui.user.home.HomeUserFragment"
+        android:label="fragment_home_user"
+        tools:layout="@layout/fragment_home_user" />
+
+    <fragment
+        android:id="@+id/navChartUser"
+        android:name="com.dondika.juraganbatik.ui.user.chart.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" />
+
+
+    <fragment
+        android:id="@+id/navAccountUser"
+        android:name="com.dondika.juraganbatik.ui.user.profile.AccountUserFragment"
+        android:label="fragment_account_user"
+        tools:layout="@layout/fragment_account_user" />
+
+
+</navigation>

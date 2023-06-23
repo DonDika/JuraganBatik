@@ -15,9 +15,9 @@
         />
 
     <fragment
-        android:id="@+id/navHistory"
+        android:id="@+id/navAddData"
         android:name="com.dondika.juraganbatik.ui.admin.add.AddDataFragment"
-        android:label="history"
+        android:label="sell"
         tools:layout="@layout/fragment_add_data"
         />
 
