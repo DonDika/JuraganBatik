@@ -1,60 +1,136 @@
 package com.dondika.juraganbatik.ui.user.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.dondika.juraganbatik.R
+import com.dondika.juraganbatik.data.model.Products
+import com.dondika.juraganbatik.databinding.FragmentHomeUserBinding
+import com.dondika.juraganbatik.ui.user.detail.DetailCatalogActivity
+import com.dondika.juraganbatik.ui.user.detail.DetailUserFragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeUserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeUserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentHomeUserBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var listCatalogUserAdapter: ListCatalogUserAdapter
+    private lateinit var parcelableState: Products
+    private val productsCollectionRef = Firebase.firestore.collection(com.dondika.juraganbatik.utility.constant.Firebase.PRODUCTS)
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentHomeUserBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setAdapter()
+        setData()
+    }
+
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
+    private fun setAdapter() {
+        listCatalogUserAdapter = ListCatalogUserAdapter()
+        binding.rvCatalog.apply {
+            adapter = listCatalogUserAdapter
+            layoutManager = GridLayoutManager(activity, 2)
+        }
+        listCatalogUserAdapter.setOnItemClickCallback(object : ListCatalogUserAdapter.OnItemClickCallback{
+            override fun onItemClicked(products: Products) {
+                selectedItem(products)
+            }
+        })
+    }
+
+    private fun setData() = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val productList: ArrayList<Products> = arrayListOf()
+            val listOfProducts = productsCollectionRef.get().await() //.toObjects(Products::class.java)
+            //Log.e( "retrieveDataIO: ", Thread.currentThread().name.toString() )
+            for (document in listOfProducts.documents){
+                //val id =
+                //document.toObject(Products::class.java)
+                val listProducts = Products (
+                    id = document.reference.id,
+                    batikName = document.data!!["batikName"].toString(),
+                    batikPrice = document.data!!["batikPrice"].toString(),
+                    batikImg =  document.data!!["batikImg"].toString(),
+                    batikAmount =  document.data!!["batikAmount"].toString(),
+                    username =  document.data!!["username"].toString()
+                )
+                //Log.e("TAGid", id )
+                Log.e("TAGid", listProducts.toString() )
+                //Log.e( "TAGid: ", Thread.currentThread().name.toString() )*/
+                productList.add(listProducts)
+            }
+            withContext(Dispatchers.Main) {
+                listCatalogUserAdapter.setListCatalog(productList)
+            }
+
+            /*
+            productsCollectionRef.get().addOnSuccessListener { querySnapshot ->
+                querySnapshot.forEach { queryDocumentSnapshot ->
+                    val products = Products(
+                        id = queryDocumentSnapshot.reference.id,
+                        batikAmount = queryDocumentSnapshot.data["batikName"].toString()
+                    )
+                    Log.e("TAG", products.id )
+                }
+            }*/
+
+
+            withContext(Dispatchers.Main){
+                //listCatalogUserAdapter.setListCatalog(listOfProducts)
+
+
+                //Log.e( "retrieveData: ", listOfProducts.toString() )
+                Log.e( "retrieveDataMain: ", Thread.currentThread().name.toString() )
+            }
+        } catch (e: Exception){
+            Log.e("Retrieve", e.message.toString() )
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_user, container, false)
+
+    private fun selectedItem(products: Products){
+        /*
+        val detailUserFragment = DetailUserFragment()
+        val bundle = Bundle()
+
+        bundle.putParcelable(DetailUserFragment.EXTRA_PRODUCT, products)
+        detailUserFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.navHostUserFragment, detailUserFragment)
+            .addToBackStack(null)
+            .commit()
+        */
+        val intent = Intent(requireActivity(), DetailCatalogActivity::class.java)
+        intent.putExtra(DetailCatalogActivity.EXTRA_PRODUCT, products)
+        startActivity(intent)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeUserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeUserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

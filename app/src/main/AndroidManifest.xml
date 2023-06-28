@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -16,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JuraganBatik"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.user.detail.DetailCatalogActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.admin.MainActivityAdmin"
             android:exported="false" />

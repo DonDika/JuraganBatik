@@ -2,6 +2,7 @@ package com.dondika.juraganbatik.ui.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -25,7 +26,7 @@ class MainActivityUser : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostUserFragment) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavView.setupWithNavController(navController)
-
+        //bottomNavView.visibility = View.VISIBLE
     }
 
 

@@ -6,8 +6,8 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="16dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
     style="?attr/materialCardViewElevatedStyle"
     >
 
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="10dp"
             >
             <ImageView
                 android:id="@+id/batikImage"
@@ -40,9 +40,8 @@
             android:id="@+id/tvBatikName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Batik Kawung"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
+            tools:text="Batik Kawung"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/cardViewImage"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp"
@@ -55,16 +54,18 @@
             android:id="@+id/tvBatikPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Rp 159.000"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toBottomOf="@id/tvBatikName"
             app:layout_constraintStart_toStartOf="parent"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
+        <!--
         <Button
             android:id="@+id/buyButton"
             android:layout_width="wrap_content"
@@ -76,67 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+            -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        &lt;!&ndash; Media &ndash;&gt;
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="194dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="content_description_media"
-            tools:src="@tools:sample/avatars"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            &lt;!&ndash; Title, secondary and supporting text &ndash;&gt;
-            <TextView
-                android:id="@+id/tvBatikName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Batik Kawung"
-                android:textAppearance="?attr/textAppearanceTitleLarge"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/tvBatikPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Rp 159.000"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="?android:attr/textColorSecondary"
-                />
-
-        </LinearLayout>
-
-        &lt;!&ndash; Buttons &ndash;&gt;
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/buyButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beli"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
--->
 </com.google.android.material.card.MaterialCardView>
