@@ -14,10 +14,10 @@
         tools:layout="@layout/fragment_home_user" />
 
     <fragment
-        android:id="@+id/navChartUser"
-        android:name="com.dondika.juraganbatik.ui.user.chart.ChartFragment"
-        android:label="fragment_chart"
-        tools:layout="@layout/fragment_chart" />
+        android:id="@+id/navTransactionUser"
+        android:name="com.dondika.juraganbatik.ui.user.transaction.TransactionFragment"
+        android:label="fragment_transaction_user"
+        tools:layout="@layout/fragment_transaction" />
 
 
     <fragment

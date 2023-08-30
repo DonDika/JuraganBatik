@@ -8,15 +8,15 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/navAddData"
+        android:id="@+id/navTransactionAdmin"
         android:enabled="true"
-        android:icon="@drawable/add_box_icon"
-        android:title="Sell"/>
+        android:icon="@drawable/receipt_long_icon"
+        android:title="Transaksi"/>
 
     <item
         android:id="@+id/navAccount"
         android:enabled="true"
         android:icon="@drawable/account_icon"
-        android:title="Account"/>
+        android:title="Akun"/>
 
 </menu>

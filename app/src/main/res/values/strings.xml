@@ -4,4 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <string-array name="roles">
+        <item>Penjual</item>
+        <item>Pembeli</item>
+    </string-array>
+
 </resources>

@@ -19,6 +19,8 @@ class MainActivityUser : AppCompatActivity() {
         setContentView(binding.root)
 
         setupBottomNav()
+
+
     }
 
     private fun setupBottomNav() {

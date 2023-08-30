@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dondika.juraganbatik.data.model.Products
+import com.dondika.juraganbatik.data.model.ProductsResponse
 import com.dondika.juraganbatik.databinding.ItemRowUserCatalogBinding
+import com.dondika.juraganbatik.utility.Utils
 
 class ListCatalogUserAdapter : RecyclerView.Adapter<ListCatalogUserAdapter.ListViewHolder>() {
 
-    private val catalogs = ArrayList<Products>()
+    private val catalogs = ArrayList<ProductsResponse>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -25,7 +26,7 @@ class ListCatalogUserAdapter : RecyclerView.Adapter<ListCatalogUserAdapter.ListV
         return catalogs.size
     }
 
-    fun setListCatalog(listCatalog: List<Products>){
+    fun setListCatalog(listCatalog: List<ProductsResponse>){
         catalogs.clear()
         catalogs.addAll(listCatalog)
         notifyDataSetChanged()
@@ -37,10 +38,11 @@ class ListCatalogUserAdapter : RecyclerView.Adapter<ListCatalogUserAdapter.ListV
 
 
     inner class ListViewHolder(private val binding: ItemRowUserCatalogBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(products: Products){
+        fun bind(products: ProductsResponse){
             binding.apply {
                 tvBatikName.text = products.batikName
-                tvBatikPrice.text = "Rp ${products.batikPrice}"
+                tvBatikPrice.text = Utils.amountFormat(products.batikPrice.toInt())
+
                 Glide.with(itemView)
                     .load(products.batikImg)
                     .into(batikImage)
@@ -52,7 +54,7 @@ class ListCatalogUserAdapter : RecyclerView.Adapter<ListCatalogUserAdapter.ListV
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(products: Products)
+        fun onItemClicked(products: ProductsResponse)
     }
 
 

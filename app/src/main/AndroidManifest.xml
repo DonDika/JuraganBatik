@@ -17,15 +17,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JuraganBatik"
+        tools:replace="android:allowBackup"
         tools:targetApi="31">
         <activity
             android:name=".ui.user.detail.DetailCatalogActivity"
             android:exported="false" />
         <activity
             android:name=".ui.admin.MainActivityAdmin"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.user.MainActivityUser"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,11 +5,8 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +15,16 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.dondika.juraganbatik.utility.constant.Firebase.PRODUCTS
-import com.dondika.juraganbatik.databinding.FragmentAddDataBinding
+import com.dondika.juraganbatik.R
+import com.dondika.juraganbatik.data.local.PreferenceManager
 import com.dondika.juraganbatik.data.model.Products
-import com.dondika.juraganbatik.utility.constant.Firebase.ProductImage
+import com.dondika.juraganbatik.utility.constant.Firestore.PRODUCTS
+import com.dondika.juraganbatik.databinding.FragmentAddDataBinding
+import com.dondika.juraganbatik.data.model.ProductsResponse
+import com.dondika.juraganbatik.ui.admin.home.HomeAdminFragment
+import com.dondika.juraganbatik.ui.auth.RegisterFragment
+import com.dondika.juraganbatik.utility.Utils
+import com.dondika.juraganbatik.utility.constant.Firestore.ProductImage
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -30,7 +33,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.File
 import kotlin.Exception
 
 class AddDataFragment : Fragment() {
@@ -41,20 +43,9 @@ class AddDataFragment : Fragment() {
     private val productImageRef = Firebase.storage.reference
 
     private var getUri: Uri? = null
-    private lateinit var currentPhotoPath: String
 
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()){
-        if (it.resultCode == RESULT_OK) {
-            val myFile = File(currentPhotoPath)
-            myFile.let { file ->
-                //getFile = file
-                binding.imagePreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
-            }
-            /*val imageBitmap = it.data?.extras?.get("data") as Bitmap
-            binding.imagePreview.setImageBitmap(imageBitmap)*/
-        }
-    }
+    private val pref by lazy { PreferenceManager(requireContext()) }
+
 
     private val launcherIntentGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){ result ->
@@ -108,9 +99,6 @@ class AddDataFragment : Fragment() {
            addButton.setOnClickListener {
                addData()
            }
-           /*cameraButton.setOnClickListener {
-               startTakePhoto()
-           }*/
            mediaButton.setOnClickListener {
                startGallery()
            }
@@ -125,23 +113,19 @@ class AddDataFragment : Fragment() {
         launcherIntentGallery.launch(chooser)
     }
 
-    private fun startTakePhoto(){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        launcherIntentCamera.launch(intent)
-    }
-
 
     private fun addData() = CoroutineScope(Dispatchers.IO).launch {
         try {
-            Log.e( "retrieveDataIO: ", Thread.currentThread().name.toString() )
-            val username = "Toko batik solo"//get id/username from datastore
-            val batikName = binding.batikName.editText?.text.toString()
+            //Log.e( "retrieveDataIO: ", Thread.currentThread().name.toString() )
+            val sellerName = pref.getString(Utils.PREF_NAME)!! //"Toko batik solo"//get id/username from datastore
+            val sellerEmail = pref.getString(Utils.PREF_EMAIL)!!
+            val batikName = binding.batikName.editText?.text.toString().uppercase()
             val batikPrice = binding.batikPrice.editText?.text.toString()
             val batikAmount = binding.batikAmount.editText?.text.toString()
             val photoRef = productImageRef.child("$ProductImage/$batikName.jpg")
             if (batikName.isEmpty() || batikAmount.isEmpty() || batikPrice.isEmpty() || getUri == null){
                 withContext(Dispatchers.Main){
-                    Toast.makeText(requireContext(),"Tolong lengkapi data!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"Silahkan lengkapi data terlebih dahulu!", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 photoRef.putFile(getUri!!)
@@ -150,20 +134,30 @@ class AddDataFragment : Fragment() {
                     }.continueWithTask {
                         val batikImg = it.result.toString()
                         val products = Products(
-                            username, batikName, batikPrice, batikAmount, batikImg
+                            sellerName, sellerEmail, batikName, batikPrice, batikAmount, batikImg
                         )
                         productsCollectionRef.add(products)
                     }.await()
                 withContext(Dispatchers.Main){
-                    Toast.makeText(requireContext(),"Berhasil upload gambar", Toast.LENGTH_SHORT).show()
-                    Log.e( "retrieveDataMain: ", Thread.currentThread().name.toString() )
+                    Toast.makeText(requireContext(),"Berhasil menambahkan produk", Toast.LENGTH_SHORT).show()
+                    closePage()
                 }
             }
         } catch (e: Exception){
             withContext(Dispatchers.Main){
                 Toast.makeText(requireContext(),e.message, Toast.LENGTH_SHORT).show()
-                Log.e("TES Firestore", e.message.toString() )
+                //Log.e("TES Firestore", e.message.toString() )
             }
+        }
+    }
+
+    private fun closePage() {
+        val homeFragment = HomeAdminFragment()
+        val fragmentManager = parentFragmentManager
+        fragmentManager.beginTransaction().apply {
+            replace(R.id.navHostFragment, homeFragment, HomeAdminFragment::class.java.simpleName)
+            addToBackStack(null)
+            commit()
         }
     }
 

@@ -15,10 +15,10 @@
         />
 
     <fragment
-        android:id="@+id/navAddData"
-        android:name="com.dondika.juraganbatik.ui.admin.add.AddDataFragment"
-        android:label="sell"
-        tools:layout="@layout/fragment_add_data"
+        android:id="@+id/navTransactionAdmin"
+        android:name="com.dondika.juraganbatik.ui.admin.transaction.TransactionAdminFragment"
+        android:label="transaction"
+        tools:layout="@layout/fragment_transaction_admin"
         />
 
     <fragment

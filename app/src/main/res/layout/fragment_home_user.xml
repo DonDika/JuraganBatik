@@ -7,13 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.user.home.HomeUserFragment">
 
+    <SearchView
+        android:id="@+id/search_catalog"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Cari batik keinginanmu!"
+        android:background="@drawable/search_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCatalog"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_catalog"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_row_user_catalog"
         />

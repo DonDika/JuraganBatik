@@ -6,7 +6,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="16dp"
     style="?attr/materialCardViewElevatedStyle"
     >
@@ -40,9 +40,8 @@
             android:id="@+id/tvBatikName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Batik Kawung"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textStyle="bold"
+            tools:text="Batik Kawung"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/cardViewImage"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp"
@@ -55,23 +54,24 @@
             android:id="@+id/tvBatikPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Rp 159.000"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toBottomOf="@id/tvBatikName"
             app:layout_constraintStart_toStartOf="parent"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <Button
-            android:id="@+id/editButton"
+            android:id="@+id/delete_button"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/edit_icon"
-            app:iconSize="32dp"
+            app:icon="@drawable/delete_icon"
+            app:iconSize="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

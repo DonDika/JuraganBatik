@@ -12,10 +12,24 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Utils {
+
+
+    const val PREF_TRANSACTION_ID = "transaction_id"
+    const val PREF_IS_LOGIN = "pref_is_login"
+    const val PREF_NAME = "pref_name"
+    const val PREF_EMAIL = "pref_email"
+    const val PREF_PHONE_NUM = "pref_phone_num"
+    const val PREF_ROLES = "pref_roles"
+
+    const val PEMBELI = "Pembeli"
+    const val PENJUAL = "Penjual"
+
 
     private const val FILENAME_FORMAT = "dd-MM-yyyy"
     private const val MAXIMAL_SIZE = 1000000
@@ -56,6 +70,11 @@ object Utils {
         } while (streamLength > MAXIMAL_SIZE)
         bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
         return file
+    }
+
+    fun amountFormat(number: Int): String{
+        val numberFormat: NumberFormat = DecimalFormat("Rp #,###")
+        return numberFormat.format(number)
     }
 
 }
